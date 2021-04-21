@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:mytestflutter/Getx/test_getx.dart';
 
 class ControlerCount extends GetxController{
-  var num =0.obs;
+  int num= 0;
   void increase(){
-   var numsum = num+1;
+   num++;
    update();
   }
 }

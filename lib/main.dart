@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:mytestflutter/logins/login.dart';
+import 'package:mytestflutter/pages/homepage.dart';
 import 'package:mytestflutter/provider/test_provider.dart';
 import 'package:mytestflutter/test/test_control.dart';
 
@@ -22,10 +24,12 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         title: 'LagoTech',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.green,
+          fontFamily: 'NotoSansLao'
+          
           // visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: WebApp(),
+        home: HomePage(),
       ),
     );
   }
@@ -34,6 +38,6 @@ class MyApp extends StatelessWidget {
 class WebApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TestPage();
+    return LoginPage();
   }
 }

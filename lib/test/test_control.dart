@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mytestflutter/Getx/colorController.dart';
+
 import 'package:mytestflutter/Getx/test_getx.dart';
 import 'package:mytestflutter/class/test_class.dart';
 import 'package:mytestflutter/provider/test_provider.dart';
@@ -14,9 +16,15 @@ class TestPage extends StatefulWidget {
 class _TestPageState extends State<TestPage> {
   // getxput
   final getxname = Get.put(Controller());
+  final getcolordeflut = Get.put(ControllerColor());
+ 
+  
+
   //
   @override
   Widget build(BuildContext context) {
+   
+ 
     return Scaffold(
       body: Center(
         child: SafeArea(
@@ -29,7 +37,7 @@ class _TestPageState extends State<TestPage> {
               testgetx(),
               testProvid(),
               testbutton(),
-               testbuttonNext(),
+              testbuttonNext(),
             ],
           ),
         )),
@@ -70,13 +78,14 @@ class _TestPageState extends State<TestPage> {
 
 // providerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
   testbutton() {
+  Color colordefult = Theme.of(context).primaryColor; 
     return Consumer<TestProvider>(
         builder: (context, value, _) => Column(
               children: [
                 TextButton(
                   onPressed: () {
                     setState(() {
-                      value.providerGet = 'change provider';
+                      value.providerSet = 'change provider';
                       getxname.name = 'change getx'.obs;
                     });
                   },
@@ -84,23 +93,24 @@ class _TestPageState extends State<TestPage> {
                     'change',
                     style: TextStyle(color: Colors.white),
                   ),
-                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                  style: TextButton.styleFrom(backgroundColor: getcolordeflut.controlColor(context)),
                 )
               ],
             ));
   }
 
-
   testbuttonNext() {
+    Color colordefult = Theme.of(context).primaryColor; 
     return TextButton(
       onPressed: () {
-        Get.to(Testsumgetx(),transition: Transition.cupertino);
+        Get.to(Testsumgetx(), transition: Transition.cupertino);
       },
       child: Text(
         'next Page',
         style: TextStyle(color: Colors.white),
       ),
-      style: TextButton.styleFrom(backgroundColor: Colors.blue),
+      style: TextButton.styleFrom(backgroundColor:  getcolordeflut.controlColor(context)),
     );
   }
+
 }

@@ -3,7 +3,7 @@ class TestProvider with ChangeNotifier {
   String _nameProvider = 'Providerbyton';
  
   String get providerGet => _nameProvider;
-  set providerGet(String newName){
+  set providerSet(String newName){
       _nameProvider = newName;
       notifyListeners();  
   }
