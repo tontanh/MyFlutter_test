@@ -28,7 +28,7 @@ import 'package:mytestflutter/models/testclass_api.dart';
 
 Future<List<TestModelApi>> fetchUsers() async {
   try {
-    final url = Uri.https('api.tonserver.cf', '/public/api/read/');
+    final url = Uri.http('api.tonserver.cf', '/public/api/read/');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {

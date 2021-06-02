@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytestflutter/Getx/colorController.dart';
 import 'package:http/http.dart' as http;
+import 'package:mytestflutter/logins/mainPage.dart';
 import 'package:mytestflutter/models/user_teacher.dart';
 import 'package:mytestflutter/pages/homepage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -18,7 +20,12 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController name = TextEditingController();
   TextEditingController pass = TextEditingController();
   TextEditingController stat = TextEditingController();
-
+  String names,passs;
+@override
+void initState() {
+    getData();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,10 +38,11 @@ class _RegisterPageState extends State<RegisterPage> {
               SizedBox(height: 10),
               textinputname(),
               textinputphone(),
-              
-              _user == null?Text('Nothiing'):Text("stat == ${_user.state} name == NoShow"),
+              _user == null
+                  ? Text('Nothiing')
+                  : Text("stat == ${_user.state} name == NoShow"),
+
               SizedBox(height: 10),
-              
               buttonWidget(context),
             ],
           ),
@@ -43,7 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Future<UserTeacher> getUserjsonParams({String name ,pass}) async {
+  Future<UserTeacher> getUserjsonParams({String name, pass}) async {
     final String url = "http://lagotech.la/sorkao/app-upload-picture/login.php";
     Map<String, String> qParams = {
       'u_name': name,
@@ -82,15 +90,19 @@ class _RegisterPageState extends State<RegisterPage> {
           print('name ==' + name.text);
           print('phone ==' + pass.text);
           // getUserjsonParams();
-          final UserTeacher user = await getUserjsonParams(name: name.text,pass: pass.text);
+          final UserTeacher user =
+              await getUserjsonParams(name: name.text, pass: pass.text);
           setState(() {
-           
-            _user =user;
-            
-
+            _user = user;
           });
-          if (_user.state ==1) {
-             Get.to(HomePage('HomePage'), transition: Transition.rightToLeft);
+          if (_user.state == 1) {
+
+            SharedPreferences pref = await  SharedPreferences.getInstance();
+            pref.setString('name', name.text);
+             pref.setString('pass', pass.text);
+            Get.offAll(HomePage('HomePage'),
+                transition: Transition.rightToLeft);
+
           } else {
             Container();
           }
@@ -102,7 +114,7 @@ class _RegisterPageState extends State<RegisterPage> {
   showTxt(context) {
     return Container(
       child: Text(
-        'Login API',
+        'Login API $names $passs',
         style: TextStyle(
             color: getcolor.controlColor(context),
             fontSize: 30,
@@ -159,5 +171,13 @@ class _RegisterPageState extends State<RegisterPage> {
         },
       ),
     );
+  }
+
+  getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+    names = prefs.getString('name');
+    passs = prefs.getString('pass');
+    });
   }
 }

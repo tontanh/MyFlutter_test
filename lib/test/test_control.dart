@@ -18,8 +18,6 @@ class _TestPageState extends State<TestPage> {
   final getxname = Get.put(Controller());
   final getcolordeflut = Get.put(ControllerColor());
  
-  
-
   //
   @override
   Widget build(BuildContext context) {
