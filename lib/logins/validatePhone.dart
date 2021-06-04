@@ -11,7 +11,6 @@ class PHoneValidate extends StatefulWidget {
   @override
   _PHoneValidateState createState() => _PHoneValidateState();
 }
-
 class _PHoneValidateState extends State<PHoneValidate> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   final getcolor = Get.put(ControllerColor());

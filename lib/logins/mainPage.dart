@@ -6,8 +6,12 @@ import 'package:mytestflutter/logins/pageConfirmPhone.dart';
 import 'package:mytestflutter/logins/login_api.dart';
 import 'package:mytestflutter/pages/api_1_2.dart';
 import 'package:mytestflutter/pages/homepage.dart';
+import 'package:mytestflutter/pages/phone_auth.dart';
 import 'package:mytestflutter/pages/picturePHPbinary.dart';
 import 'package:mytestflutter/pages/picturePhp.dart';
+import 'package:mytestflutter/pages/qr_code.dart';
+import 'package:mytestflutter/pages/scan_qr_code.dart';
+import 'package:mytestflutter/test/test_control.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -40,12 +44,15 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               showTxt(context),
               SizedBox(height: 10),
+              buttonWidgetLoginPhone(context),
+              buttonWidgetControl(context),
               buttonWidget(context),
               buttonWidgetre(context),
               buttonWidgetGETAPI(context),
               buttonWidgetAPI_1_2(context),
               buttonWidgetPicture(context),
-              // buttonWidgetPictureBinary(context),
+              buttonWidgetQRCode(context),
+              buttonWidgetScanQRCode(context),
             ],
           ),
         )),
@@ -80,6 +87,22 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+    buttonWidgetLoginPhone(context) {
+    return Container(
+      color: Colors.red,
+      child: TextButton(
+        style: TextButton.styleFrom(
+            backgroundColor: Colors.red),
+        child: Text(
+          'Phone auth server',
+          style: TextStyle(color: Colors.white),
+        ),
+        onPressed: () {
+          Get.to(()=>PhoneAuthScreen(), transition: Transition.rightToLeft);
+        },
+      ),
+    );
+  }
 
   buttonWidgetre(context) {
     return Container(
@@ -102,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
         style: TextButton.styleFrom(
             backgroundColor: getcolor.controlColor(context)),
         child: Text(
-          'API 1=2',
+          'API return data',
           style: TextStyle(color: Colors.white),
         ),
         onPressed: () {
@@ -127,6 +150,21 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+     buttonWidgetControl(context) {
+    return Container(
+      child: TextButton(
+        style: TextButton.styleFrom(
+            backgroundColor: getcolor.controlColor(context)),
+        child: Text(
+          'state manager',
+          style: TextStyle(color: Colors.white),
+        ),
+        onPressed: () {
+          Get.to(()=>TestPage(), transition: Transition.rightToLeft);
+        },
+      ),
+    );
+  }
   buttonWidgetPicture(context) {
     return Container(
       child: TextButton(
@@ -142,17 +180,32 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-    buttonWidgetPictureBinary(context) {
+    buttonWidgetQRCode(context) {
     return Container(
       child: TextButton(
         style: TextButton.styleFrom(
             backgroundColor: getcolor.controlColor(context)),
         child: Text(
-          'Upload image Using PHP Binary',
+          'Generate QR Code',
           style: TextStyle(color: Colors.white),
         ),
         onPressed: () {
-          Get.to(()=>PictureBinary(), transition: Transition.rightToLeft);
+          Get.to(()=>QRCodeMainPage(), transition: Transition.rightToLeft);
+        },
+      ),
+    );
+  }
+      buttonWidgetScanQRCode(context) {
+    return Container(
+      child: TextButton(
+        style: TextButton.styleFrom(
+            backgroundColor: getcolor.controlColor(context)),
+        child: Text(
+          'scan QR Code',
+          style: TextStyle(color: Colors.white),
+        ),
+        onPressed: () {
+          Get.to(()=>QRViewExample(), transition: Transition.rightToLeft);
         },
       ),
     );
